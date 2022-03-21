@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ContentChildren, QueryList, AfterContentInit, ComponentFactoryResolver, ViewChildren, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { interval } from 'rxjs';
 import { debounce } from 'rxjs/operators';
@@ -17,10 +17,11 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
   change = new EventEmitter<SecuritiesFilter>();
 
   @ContentChildren(FilterComponent) filters: QueryList<FilterComponent>;
+  @ViewChildren(TemplateRef) TemplateRefs: QueryList<TemplateRef>;
 
   public form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private resolver: ComponentFactoryResolver) {
     this.form = this.formBuilder.group({
       name: [null],
       types: [null],
@@ -29,11 +30,13 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
     });
   }
   ngAfterContentInit(): void {
-    console.dir(this.filters);
-  }
+    this.filters.forEach(x => {
+      const factory = this.resolver.resolveComponentFactory(MessageComponent);
+      this.componentRef = this.entry.createComponent(factory);
+      this.componentRef.instance.message = message;
+    });
 
   ngOnInit(): void {
-    
     this.onChanges();
   }
 
