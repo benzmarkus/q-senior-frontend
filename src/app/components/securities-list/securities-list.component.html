@@ -1,6 +1,6 @@
 ﻿<filterable-table
   class="security-list"
-  [dataSource]="securities$ | async"
+  [dataSource]="securities"
   [isLoading]="loadingSecurities$ | async">
 
   <app-filter-bar
@@ -13,6 +13,8 @@
   <fb-filter label="Currencies" placeholderText="Currency select ..." controlName="currencies" type="string" mode="multiple" [source]="currenciesSource"></fb-filter>
   <fb-filter label="NIs Privateme" controlName="isPrivate" type="bool" mode="single"></fb-filter>
 </app-filter-bar>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" (page)="doPaging($event)"> </mat-paginator>
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Name </th>

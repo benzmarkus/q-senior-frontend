@@ -1,7 +1,7 @@
 ﻿<!-- Feel free to replace this placeholder with your filterbar -->
 <fieldset class="filter-bar-placeholder" *ngIf="filterBar">
   <legend>Filter bar should go here</legend>
-    <ng-content select="app-filter-bar"></ng-content>
+  <ng-content select="app-filter-bar"></ng-content>
 </fieldset>
 
 <div class="table-wrapper">
@@ -12,4 +12,5 @@
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-content></ng-content>
   </table>
+  <ng-content select="mat-paginator"></ng-content>
 </div>
