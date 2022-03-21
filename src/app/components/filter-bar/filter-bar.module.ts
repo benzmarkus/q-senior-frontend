@@ -8,11 +8,14 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { StringFilterComponent } from './string-filter.component';
+import { BoolFilterComponent } from './filter-controls/bool-filter.component';
+import { StringsFilterComponent } from './filter-controls/strings-filter.component';
+import { StringFilterComponent } from './filter-controls/string-filter.component';
+import { FilterComponent } from './filter-controls/filter.component';
 
 
 @NgModule({
-  declarations: [FilterBarComponent, StringFilterComponent],
+  declarations: [FilterBarComponent, StringsFilterComponent, BoolFilterComponent, StringFilterComponent, FilterComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -24,6 +27,6 @@ import { StringFilterComponent } from './string-filter.component';
     MatCheckboxModule,
     MatAutocompleteModule
   ],
-  exports: [FilterBarComponent],
+  exports: [FilterBarComponent, FilterComponent],
 })
 export class FilterBarModule {}

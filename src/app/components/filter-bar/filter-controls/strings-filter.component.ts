@@ -6,10 +6,10 @@ import { BehaviorSubject, map, Observable, startWith, tap } from 'rxjs';
 import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
-  selector: 'fb-string-filter',
-  templateUrl: './string-filter.component.html',
+  selector: 'fb-strings-filter',
+  templateUrl: './strings-filter.component.html',
 })
-export class StringFilterComponent implements OnInit {
+export class StringsFilterComponent implements OnInit {
   get resultControl() {
     return <FormControl>this.parentForm.get(this.controlName);
   }

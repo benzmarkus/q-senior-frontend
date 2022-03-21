@@ -33,7 +33,6 @@ export class SecurityService {
   }
 
   private filterSecurities(securityFilter: SecuritiesFilter) {
-    console.dir(securityFilter);
     if (!securityFilter) return SECURITIES;
 
     return SECURITIES.filter(s =>

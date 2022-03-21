@@ -1,19 +1,22 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { interval } from 'rxjs';
 import { debounce } from 'rxjs/operators';
 import { SecuritiesFilter } from 'src/app/models/securitiesFilter';
+import { FilterComponent } from './filter-controls/filter.component';
 
 @Component({
   selector: 'app-filter-bar',
   templateUrl: './filter-bar.component.html',
   styleUrls: ['./filter-bar.component.scss'],
 })
-export class FilterBarComponent implements OnInit {
+export class FilterBarComponent implements OnInit, AfterContentInit {
   @Input() typesSource: string[];
   @Input() currenciesSource: string[];
   @Output()
   change = new EventEmitter<SecuritiesFilter>();
+
+  @ContentChildren(FilterComponent) filters: QueryList<FilterComponent>;
 
   public form: FormGroup;
 
@@ -25,8 +28,12 @@ export class FilterBarComponent implements OnInit {
       isPrivate: [false],
     });
   }
+  ngAfterContentInit(): void {
+    console.dir(this.filters);
+  }
 
   ngOnInit(): void {
+    
     this.onChanges();
   }
 

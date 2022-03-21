@@ -7,7 +7,12 @@
     #filterBar
     [typesSource]="typesSource"
     [currenciesSource]="currenciesSource"
-  ></app-filter-bar>
+  >
+  <fb-filter label="Name" placeholderText="Search by name ..." controlName="name" type="string" mode="single"></fb-filter>
+  <fb-filter label="Type" placeholderText="Type select ..." controlName="types" type="string" mode="multiple" [source]="typesSource"></fb-filter>
+  <fb-filter label="Currencies" placeholderText="Currency select ..." controlName="currencies" type="string" mode="multiple" [source]="currenciesSource"></fb-filter>
+  <fb-filter label="NIs Privateme" controlName="isPrivate" type="bool" mode="single"></fb-filter>
+</app-filter-bar>
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Name </th>
