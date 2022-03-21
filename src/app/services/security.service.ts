@@ -11,6 +11,17 @@ export class SecurityService {
 
   constructor() { }
 
+  onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
+
+  getTypes() {
+    return SECURITIES.map(x => x.type).filter(this.onlyUnique);
+  }
+  getCurrencies() {
+    return SECURITIES.map(x => x.currency).filter(this.onlyUnique);
+  }
+
   /**
    * Get Securities server request mock
    * */
@@ -22,6 +33,7 @@ export class SecurityService {
   }
 
   private filterSecurities(securityFilter: SecuritiesFilter) {
+    console.dir(securityFilter);
     if (!securityFilter) return SECURITIES;
 
     return SECURITIES.filter(s =>

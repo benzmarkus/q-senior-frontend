@@ -1,0 +1,11 @@
+<form [formGroup]="form" class="flex items-center gap-10 justify-start content-center">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Search by name ..." formControlName="name">
+  </mat-form-field>
+  <fb-string-filter [parentForm]="form" label="Type" placeholderText="Type select ..." [source]="typesSource" controlName="types"></fb-string-filter>
+  <fb-string-filter [parentForm]="form" label="Currencies" placeholderText="Currency select ..." [source]="currenciesSource" controlName="currencies"></fb-string-filter>
+  <div>
+    <mat-checkbox formControlName="isPrivate">Is Private</mat-checkbox>
+  </div>
+</form>

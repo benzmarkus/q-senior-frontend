@@ -3,13 +3,17 @@ import {
   Component,
   ContentChild,
   ContentChildren,
+  ElementRef,
   Input,
   QueryList,
+  TemplateRef,
   ViewChild,
 } from '@angular/core';
 import { DataSource } from "@angular/cdk/collections";
 import { MatColumnDef, MatHeaderRowDef, MatNoDataRow, MatRowDef, MatTable } from "@angular/material/table";
 import { Observable } from "rxjs";
+import { FilterBarComponent } from '@components/filter-bar/filter-bar.component';
+
 
 @Component({
   selector: 'filterable-table',
@@ -24,6 +28,7 @@ export class FilterableTableComponent<T> implements AfterContentInit {
   @ContentChild(MatNoDataRow) noDataRow: MatNoDataRow;
 
   @ViewChild(MatTable, {static: true}) table: MatTable<T>;
+  @ContentChild(FilterBarComponent) filterBar: FilterBarComponent;
 
   @Input() columns: string[];
 

@@ -1,0 +1,28 @@
+<mat-form-field [formGroup]="parentForm">
+  <mat-label>{{ label }}</mat-label>
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let sourceItem of (results$ | async)" (removed)="remove(sourceItem)">
+      {{ sourceItem }}
+      <button matChipRemove>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
+    <input
+      [placeholder]="placeholderText"
+      #chipsInput
+      [formControl]="placeholderControl"
+      [matAutocomplete]="auto"
+      [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add($event)"
+    />
+  </mat-chip-list>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <ng-container *ngFor="let filteredValue of filteredValues | async">
+      <mat-option *ngIf="!results$.value?.includes(filteredValue)" [value]="filteredValue">
+        {{ filteredValue }}
+      </mat-option>
+    </ng-container>
+  </mat-autocomplete>
+</mat-form-field>
+

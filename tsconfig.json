@@ -20,6 +20,9 @@
     "module": "es2020",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@components/*": ["src/app/components/*"]
+    },
     "lib": [
       "es2020",
       "dom"
