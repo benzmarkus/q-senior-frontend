@@ -1,4 +1,4 @@
-<mat-form-field [formGroup]="parentForm">
+<mat-form-field style="width: 300px" [formGroup]="parentForm">
   <mat-label>{{ label }}</mat-label>
   <mat-chip-list #chipList>
     <mat-chip *ngFor="let sourceItem of (results$ | async)" (removed)="remove(sourceItem)">

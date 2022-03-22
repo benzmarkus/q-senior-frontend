@@ -1,8 +1,4 @@
-﻿<!-- Feel free to replace this placeholder with your filterbar -->
-<fieldset class="filter-bar-placeholder" *ngIf="filterBar">
-  <legend>Filter bar should go here</legend>
-    <ng-content select="app-filter-bar"></ng-content>
-</fieldset>
+﻿<ng-content *ngIf="filterBar" select="filter-bar"></ng-content>
 
 <div class="table-wrapper">
   <div class="loading-indicator" *ngIf="isLoading">

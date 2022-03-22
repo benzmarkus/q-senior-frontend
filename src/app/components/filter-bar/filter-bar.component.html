@@ -1,7 +1,23 @@
 <form [formGroup]="form" class="flex items-center gap-10 justify-start content-center">
-  <ng-template *ngFor="let filter of filters"></ng-template>
-  <fb-string-filter [parentForm]="form" label="Name" placeholderText="Search by name ..." controlName="name"></fb-string-filter>
-  <fb-strings-filter [parentForm]="form" label="Type" placeholderText="Type select ..." [source]="typesSource" controlName="types"></fb-strings-filter>
-  <fb-strings-filter [parentForm]="form" label="Currencies" placeholderText="Currency select ..." [source]="currenciesSource" controlName="currencies"></fb-strings-filter>
-  <fb-bool-filter [parentForm]="form" label="Is Private" controlName="isPrivate"></fb-bool-filter>
+  <ng-container *ngFor="let filter of filters">
+    <ng-container [ngSwitch]="filter.type">
+      <ng-container *ngSwitchCase="'string'">
+        <ng-container [ngSwitch]="filter.mode">
+          <ng-container *ngSwitchCase="'single'">
+            <string-filter [parentForm]="form" label="{{filter.label}}" placeholderText="{{filter.placeholderText}}" controlName="{{filter.controlName}}"></string-filter>
+          </ng-container>
+          <ng-container *ngSwitchCase="'multiple'">
+            <strings-filter class="flex-initial" [parentForm]="form" label="{{filter.label}}" placeholderText="{{filter.placeholderText}}" [source]="filter.source" controlName="{{filter.controlName}}"></strings-filter>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngSwitchCase="'bool'">
+        <ng-container [ngSwitch]="filter.mode">
+          <ng-container *ngSwitchCase="'single'">
+            <bool-filter [parentForm]="form" label="{{filter.label}}" controlName="{{filter.controlName}}"></bool-filter>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </ng-container>
 </form>
