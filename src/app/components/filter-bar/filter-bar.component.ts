@@ -22,10 +22,14 @@ export class FilterBarComponent implements AfterContentInit {
   constructor(private formBuilder: FormBuilder) {
   }
 
+  public getFilter() {
+    return <SecuritiesFilter>this.form.value;
+  }
+
   ngAfterContentInit(): void {
-    var formDefinition = {};
+    const formDefinition = {};
     this.filters.forEach(filter => {
-      formDefinition[filter.controlName] = filter.type == "string" ? [null] : [false];
+      formDefinition[filter.controlName] = [null];
     });
     this.form = this.formBuilder.group(formDefinition);
     this.onChanges();

@@ -56,7 +56,7 @@ export class StringsFilterComponent implements OnInit {
     if (!value || value.trim() == '') {
       return;
     }
-    var newResult = this.results$.value?.slice(0) ?? [];
+    const newResult = this.results$.value?.slice(0) ?? [];
     const index = newResult.indexOf(value);
     if (index >= 0) {
       newResult.splice(index, 1);
@@ -72,7 +72,7 @@ export class StringsFilterComponent implements OnInit {
     if (!value || value.trim() == '') {
       return;
     }
-    var newResult = this.results$.value?.slice(0) ?? [];
+    const newResult = this.results$.value?.slice(0) ?? [];
     newResult.push(value);
     this.results$.next(newResult);
   }
@@ -85,7 +85,7 @@ export class StringsFilterComponent implements OnInit {
 
   private _filter(search: string): string[] {
     const filterValue = search.toLowerCase();
-    var result = this.source.filter((sourceItem) =>
+    const result = this.source.filter((sourceItem) =>
       sourceItem.toLowerCase().includes(filterValue)
     );
     return result;

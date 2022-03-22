@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { delay, Observable, of } from "rxjs";
-import { Security } from "../models/security";
-import { SECURITIES } from "../mocks/securities-mock";
-import { SecuritiesFilter } from "../models/securitiesFilter";
+import { delay, of } from 'rxjs';
+
+import { SECURITIES } from '../mocks/securities-mock';
+import { SecuritiesFilter } from '../models/securitiesFilter';
 
 @Injectable({
   providedIn: 'root'
@@ -25,11 +25,15 @@ export class SecurityService {
   /**
    * Get Securities server request mock
    * */
-  getSecurities(securityFilter?: SecuritiesFilter): Observable<Security[]> {
-    const filteredSecurities = this.filterSecurities(securityFilter)
-      .slice(securityFilter?.skip ?? 0, securityFilter?.limit ?? 100);
-
-    return of(filteredSecurities).pipe(delay(1000));
+  getSecurities(securityFilter?: SecuritiesFilter) {
+    const filteredSecurities = this.filterSecurities(securityFilter);
+    const totalRecords = filteredSecurities.length;
+    const skip = securityFilter?.skip ?? undefined;
+    let limit = securityFilter?.limit ?? undefined;
+    if (limit >= 0 && skip >= 0) {
+      limit = skip + limit;
+    }
+    return of([totalRecords, filteredSecurities.slice(skip, limit)]).pipe(delay(1000));
   }
 
   private filterSecurities(securityFilter: SecuritiesFilter) {
@@ -39,7 +43,7 @@ export class SecurityService {
       (!securityFilter.name || s.name.includes(securityFilter.name))
       && (!securityFilter.types || securityFilter.types.some(type => s.type === type))
       && (!securityFilter.currencies || securityFilter.currencies.some(currency => s.currency == currency))
-      && (securityFilter.isPrivate === undefined || securityFilter.isPrivate === s.isPrivate)
+      && (securityFilter.isPrivate == undefined || securityFilter.isPrivate === s.isPrivate)
     );
   }
 }
