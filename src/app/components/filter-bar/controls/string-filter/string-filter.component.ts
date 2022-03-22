@@ -11,6 +11,5 @@ export class StringFilterComponent {
   @Input() parentForm: FormGroup;
   @Input() placeholderText: string;
 
-  constructor() {
-  }
+  constructor() {}
 }

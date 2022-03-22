@@ -45,13 +45,11 @@ export class SecuritiesListComponent implements OnInit, AfterViewInit {
           }
           filter.skip = this.paginator.pageIndex * this.paginator.pageSize;
           filter.limit = this.paginator.pageSize;
-          console.dir(filter);
           return this.securityService
             .getSecurities(filter)
             .pipe(indicate(this.loadingSecurities$));
         }),
         tap((data) => {
-          console.dir(data)
           const [totalRecords, records] = data;
           this.totalRecords = <number>totalRecords;
         }),

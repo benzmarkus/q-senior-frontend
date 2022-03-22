@@ -40,7 +40,14 @@ export class FilterBarComponent implements AfterContentInit {
       if (this.form.invalid) {
         return;
       }
-      this.change.next(this.form.value);
+      var result = this.form.value;
+      for(const prop in result) {
+        const value = result[prop];
+        if (typeof(value) === "string" && value.trim() === "") {
+          result[prop] = null;
+        }
+      }
+      this.change.next(result);
     });
   }
 }
