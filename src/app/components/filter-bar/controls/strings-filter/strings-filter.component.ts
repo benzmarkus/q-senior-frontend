@@ -1,13 +1,13 @@
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { BehaviorSubject, map, Observable, startWith, tap } from 'rxjs';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { BehaviorSubject, map, Observable, startWith } from 'rxjs';
 
 @Component({
-  selector: 'fb-strings-filter',
-  templateUrl: './strings-filter.component.html',
+  selector: 'strings-filter',
+  templateUrl: './strings-filter.component.html'
 })
 export class StringsFilterComponent implements OnInit {
   get resultControl() {

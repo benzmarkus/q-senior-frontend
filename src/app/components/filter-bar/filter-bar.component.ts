@@ -1,18 +1,17 @@
-import { Component, Input, Output, EventEmitter, OnInit, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, EventEmitter, Output, QueryList } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { SecuritiesFilter } from '@models/securitiesFilter';
 import { interval } from 'rxjs';
 import { debounce } from 'rxjs/operators';
-import { SecuritiesFilter } from 'src/app/models/securitiesFilter';
-import { FilterComponent } from './filter-controls/filter.component';
+
+import { FilterComponent } from './controls/filter.component';
 
 @Component({
-  selector: 'app-filter-bar',
+  selector: 'filter-bar',
   templateUrl: './filter-bar.component.html',
   styleUrls: ['./filter-bar.component.scss'],
 })
-export class FilterBarComponent implements OnInit, AfterContentInit {
-  @Input() typesSource: string[];
-  @Input() currenciesSource: string[];
+export class FilterBarComponent implements AfterContentInit {
   @Output()
   change = new EventEmitter<SecuritiesFilter>();
 
@@ -21,19 +20,14 @@ export class FilterBarComponent implements OnInit, AfterContentInit {
   public form: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
-    this.form = this.formBuilder.group({
-      name: [null],
-      types: [null],
-      currencies: [null],
-      isPrivate: [false],
-    });
-  }
-  ngAfterContentInit(): void {
-    console.dir(this.filters);
   }
 
-  ngOnInit(): void {
-    
+  ngAfterContentInit(): void {
+    var formDefinition = {};
+    this.filters.forEach(filter => {
+      formDefinition[filter.controlName] = filter.type == "string" ? [null] : [false];
+    });
+    this.form = this.formBuilder.group(formDefinition);
     this.onChanges();
   }
 

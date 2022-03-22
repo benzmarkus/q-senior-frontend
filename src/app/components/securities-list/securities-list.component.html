@@ -1,39 +1,58 @@
 ﻿<filterable-table
   class="security-list"
   [dataSource]="securities"
-  [isLoading]="loadingSecurities$ | async">
-
-  <app-filter-bar
-    #filterBar
-    [typesSource]="typesSource"
-    [currenciesSource]="currenciesSource"
-  >
-  <fb-filter label="Name" placeholderText="Search by name ..." controlName="name" type="string" mode="single"></fb-filter>
-  <fb-filter label="Type" placeholderText="Type select ..." controlName="types" type="string" mode="multiple" [source]="typesSource"></fb-filter>
-  <fb-filter label="Currencies" placeholderText="Currency select ..." controlName="currencies" type="string" mode="multiple" [source]="currenciesSource"></fb-filter>
-  <fb-filter label="NIs Privateme" controlName="isPrivate" type="bool" mode="single"></fb-filter>
-</app-filter-bar>
-
+  [isLoading]="loadingSecurities$ | async"
+>
+  <filter-bar #filterBar>
+    <fb-filter
+      label="Name"
+      placeholderText="Search by name ..."
+      controlName="name"
+      type="string"
+      mode="single"
+    ></fb-filter>
+    <fb-filter
+      label="Type"
+      placeholderText="Type select ..."
+      controlName="types"
+      type="string"
+      mode="multiple"
+      [source]="typesSource"
+    ></fb-filter>
+    <fb-filter
+      label="Currencies"
+      placeholderText="Currency select ..."
+      controlName="currencies"
+      type="string"
+      mode="multiple"
+      [source]="currenciesSource"
+    ></fb-filter>
+    <fb-filter
+      label="Is Private"
+      controlName="isPrivate"
+      type="bool"
+      mode="single"
+    ></fb-filter>
+  </filter-bar>
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" (page)="doPaging($event)"> </mat-paginator>
-
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let security"> {{ security.name }} </td>
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let security">{{ security.name }}</td>
   </ng-container>
 
   <ng-container matColumnDef="type">
-    <th mat-header-cell *matHeaderCellDef> Type </th>
-    <td mat-cell *matCellDef="let security"> {{ security.type }} </td>
+    <th mat-header-cell *matHeaderCellDef>Type</th>
+    <td mat-cell *matCellDef="let security">{{ security.type }}</td>
   </ng-container>
 
   <ng-container matColumnDef="currency">
-    <th mat-header-cell *matHeaderCellDef> Currency </th>
-    <td mat-cell *matCellDef="let security"> {{ security.currency }} </td>
+    <th mat-header-cell *matHeaderCellDef>Currency</th>
+    <td mat-cell *matCellDef="let security">{{ security.currency }}</td>
   </ng-container>
 
   <!-- Custom row definitions to be provided to the wrapper table. -->
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
   <!-- Row shown when there is no matching data that will be provided to the wrapper table. -->
   <tr class="mat-row" *matNoDataRow>

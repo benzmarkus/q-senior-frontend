@@ -1,12 +1,11 @@
 ﻿import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { Security } from "../../models/security";
-import { BehaviorSubject, Observable, switchMap } from "rxjs";
-import { indicate } from "../../utils";
-import { SecurityService } from "../../services/security.service";
-import { CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY_PROVIDER_FACTORY } from '@angular/cdk/overlay/overlay-directives';
 import { FilterBarComponent } from '@components/filter-bar/filter-bar.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Security } from '@models/security';
+import { SecurityService } from '@services/security.service';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
+import { indicate } from 'src/app/utils';
 
 @Component({
   selector: 'securities-list',
